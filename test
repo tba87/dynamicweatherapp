@@ -1,0 +1,49 @@
+🌦️ Dynamic Weather App
+A sleek, real-time weather application built with modern web technologies.
+
+Get accurate weather forecasts, beautiful dynamic backgrounds, and a seamless user experience—all in one place!
+
+🔥 Features
+Real-time Weather Data – Fetch current weather conditions for any location
+
+Dynamic Backgrounds – UI adapts to weather conditions (sunny, rainy, snowy, etc.)
+
+Search Any City – Find weather info for cities worldwide
+
+Responsive Design – Works on mobile, tablet, and desktop
+
+Clean & Modern UI – Intuitive and visually appealing interface
+
+🚀 Try It Out
+👉 Live Demo (Replace with your actual deployment link)
+
+Or run it locally:
+git clone https://github.com/tba87/dynamicweatherapp.git
+cd dynamicweatherapp
+npm install
+npm start
+
+🛠️ Built With
+React – Frontend framework
+
+OpenWeatherMap API – Weather data
+
+CSS Modules – Styling
+
+Vite – Fast development build
+
+📸 Screenshots
+Sunny Weather	Rainy Weather	Night Mode
+Sunny	Rainy	Night
+(Replace with actual screenshots from your app)
+
+🤝 Contributing
+Pull requests are welcome! For major changes, please open an issue first.
+
+📜 License
+MIT © Your Name
+
+⭐ Star this repo if you like it! ⭐
+
+Need weather info on the go? Dynamic Weather App has you covered! ☀️🌧️❄️
+
