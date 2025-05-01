@@ -47,7 +47,7 @@ This project is a simple weather web application that fetches and displays the c
    npm start
    ```
 
-3. The app will be available at `http://localhost:3000`.
+3. The app will be available at `http://localhost:5000`.
 
 ### Steps to Run With Docker
 
@@ -55,13 +55,13 @@ This project is a simple weather web application that fetches and displays the c
 2. In the project folder, run the following command to build the Docker image:
 
    ```bash
-   docker build -t weather-web-app .
+   docker build -t dynamicweatherapp .
    ```
 
 3. After building the image, run it:
 
    ```bash
-   docker run -p 9999:3000 weather-web-app:latest
+   docker run -p 9999:5000 -e OPENWEATHER_API_KEY=your_api_key_here dynamicweatherapp:latest
    ```
 
 4. The app will be available at `http://localhost:9999`.
