@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
-const fetch = require('node-fetch');
+// Updated fetch import for Node.js compatibility
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 require('dotenv').config();
 
 const app = express();
