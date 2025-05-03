@@ -1,27 +1,45 @@
-# Use official Node.js LTS image with Alpine for smaller size
-FROM node:20-alpine
+# Build stage
+FROM node:20.11.1-alpine AS builder
 
-# Set the working directory
 WORKDIR /app
 
-# Copy only backend package files first for better caching
+# Copy package files
 COPY backend/package*.json ./
 
-# Install production dependencies only (no devDependencies)
-RUN npm install --production
+# Install all dependencies (including devDependencies)
+RUN npm ci
 
-# Copy backend source code
+# Copy source code
 COPY backend/ ./
 
-# Copy public folder separately
+# Production stage
+FROM node:20.11.1-alpine
+
+# Create non-root user
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+WORKDIR /app
+
+# Copy only production dependencies from builder
+COPY --from=builder /app/node_modules ./node_modules
+COPY backend/ ./
 COPY public/ ../public/
 
-# Use the same port as your server.js (5000 instead of 3000)
+# Set ownership to non-root user
+RUN chown -R appuser:appgroup /app
+
+# Switch to non-root user
+USER appuser
+
+# Environment variables
+ENV NODE_ENV=production
+ENV PORT=5000
+
 EXPOSE 5000
 
-# Use node directly instead of npm for better process handling
-CMD ["node", "server.js"]
-
-# Optional health check
+# Health check with wget (more lightweight than curl)
 HEALTHCHECK --interval=30s --timeout=3s \
-  CMD curl -f http://localhost:5000/api/health || exit 1
+  CMD wget --no-verbose --tries=1 --spider http://localhost:5000/api/health || exit 1
+
+# Use node directly for better process handling
+CMD ["node", "server.js"]
